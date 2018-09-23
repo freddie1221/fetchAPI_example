@@ -25,20 +25,21 @@
 
   const ul = document.getElementById('authors');
   const url = 'https://randomuser.me/api/?results=10';
+// fine up to this point
 
-fetch(url)
-  .then((resp) => resp.json())
-    .then(function(data) {
-    let authors = data.results;
-    return authors.map(function(author) {
-      let li = createNode('li'),
-          img = createNode('img'),
-          span = createNode('span');
-      img.src = author.picture.medium;
-      span.innerHTML = `${author.name.first} ${author.name.last}`;
-      append(li, img);
-      append(li, span);
-      append(ul, li);
+fetch(url) // retrieve the object
+  .then((resp) => resp.json()) // run the Json method on the object.
+    .then(function(data) { 
+      let authors = data.results; // assign authors to the results property of the data object
+      return authors.map(function(author) { // do some mapping etc etc
+        let li = createNode('li'),
+            img = createNode('img'),
+            span = createNode('span');
+        img.src = author.picture.medium;
+        span.innerHTML = `${author.name.first} ${author.name.last}`;
+        append(li, img);
+        append(li, span);
+        append(ul, li);
       })
     })
   .catch(function(error) {
